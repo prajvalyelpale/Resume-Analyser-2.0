@@ -23,12 +23,13 @@ app = FastAPI(
 )
 
 # ---------------------------------------------------------------------------
-# CORS – allow the Vite dev server during local development.
-# Replace "*" with specific origins before deploying to production.
+# CORS – origins are controlled via the ALLOWED_ORIGINS env var.
+# Local default: http://localhost:5173 (Vite dev server).
+# Production: set ALLOWED_ORIGINS=https://your-app.vercel.app on Render.
 # ---------------------------------------------------------------------------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=settings.allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

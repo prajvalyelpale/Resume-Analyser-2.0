@@ -19,6 +19,16 @@ class Settings:
     app_name: str = os.getenv("APP_NAME", "Resume AI Analyzer")
     app_version: str = "0.1.0"
     debug: bool = os.getenv("DEBUG", "false").lower() == "true"
+
+    # Comma-separated list of allowed CORS origins.
+    # Local default: Vite dev server.
+    # Production: set ALLOWED_ORIGINS=https://your-app.vercel.app on Render.
+    allowed_origins: list[str] = [
+        o.strip()
+        for o in os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
+        if o.strip()
+    ]
+
     # Future: add DATABASE_URL, SECRET_KEY, AI_API_KEY, …
 
 
